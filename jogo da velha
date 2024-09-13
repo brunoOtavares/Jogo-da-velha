@@ -1,0 +1,152 @@
+#include<iostream>
+using namespace std;
+char tab[3][3];
+int l,c;
+bool jogo;
+//Desenha o array
+
+void Tabuleiro(){
+
+
+    for (l = 0 ; l < 3 ; l++){
+        for(c = 0 ; c < 3 ; c++){
+        tab[l][c] ='*';
+        }
+        }
+
+
+}
+
+//desenhar  o tabuleiro
+void Desenho(){
+    cout << "  A /B /C" << endl;
+
+    for (l = 0 ; l < 3 ; l++){
+        for(c = 0 ; c < 3 ; c++){
+        cout << "  " << tab[l][c];
+        }
+        cout <<" "<< l + 1 << endl;
+        }
+
+
+
+
+}
+
+
+//escrever no tabuleiro
+
+void Escrever(){
+ int Linha;
+ char Coluna,Tecla;
+
+ cout << "Escolha uma Coluna A/B/C: ";
+ cin >> Coluna;
+ cout << "Escolha uma Linha 1/2/3: ";
+ cin >> Linha;
+ cout << "Qual letra deseja usar X/O: ";
+ cin >> Tecla;
+Coluna = toupper(Coluna);
+// Define em qual posiçao vai desenhar
+//Eu sei que essa porra ta mo bagunçada depois eu vou arrumar. depois = nunca
+ switch(Coluna){
+    case 'A':
+        switch(Linha){
+            case 1:
+                tab[0][0] = Tecla;
+                break;
+            case 2:
+                tab[1][0] = Tecla;
+                break;
+            case 3:
+                tab[2][0] = Tecla;
+                break;
+
+
+}
+break;
+
+    case 'B':
+        switch(Linha){
+            case 1:
+                tab[0][1] = Tecla;
+                break;
+            case 2:
+                tab[1][1] = Tecla;
+                break;
+            case 3:
+                tab[2][1] = Tecla;
+                break;
+
+
+
+}
+break;
+
+case 'C':
+        switch(Linha){
+            case 1:
+                tab[0][2] = Tecla;
+                break;
+            case 2:
+                tab[1][2] = Tecla;
+                break;
+            case 3:
+                tab[2][2] = Tecla;
+                break;
+
+
+
+}
+break;
+}
+}
+
+// verica o vencedor.
+// eu fiquei tentando 50 minutos desenvolver minha propia logica dps tiltei e apelei pro chatgpt
+bool Vencedor() {
+    // Verificar linhas
+    for (l = 0; l < 3; l++) {
+        if (tab[l][0] == tab[l][1] && tab[l][1] == tab[l][2] && tab[l][0] != '*') {
+            cout << "Vencedor: " << tab[l][0] << endl;
+            return true;
+        }
+    }
+    // Verificar colunas
+    for (c = 0; c < 3; c++) {
+        if (tab[0][c] == tab[1][c] && tab[1][c] == tab[2][c] && tab[0][c] != '*') {
+            cout << "Vencedor: " << tab[0][c] << endl;
+            return true;
+        }
+    }
+    // Verificar diagonais
+    if (tab[0][0] == tab[1][1] && tab[1][1] == tab[2][2] && tab[0][0] != '*') {
+        cout << "Vencedor: " << tab[0][0] << endl;
+        return true;
+    }
+    if (tab[0][2] == tab[1][1] && tab[1][1] == tab[2][0] && tab[0][2] != '*') {
+        cout << "Vencedor: " << tab[0][2] << endl;
+        return true;
+    }
+
+    return false;
+}
+//funçao main
+int main(){
+ jogo = true;
+
+Tabuleiro();
+while(jogo){
+    Desenho();
+    Escrever();
+    //valida o vencedor e encerra o programa
+    if (Vencedor() == 1){
+        Desenho();
+        break;
+    }
+
+}
+
+
+ return 0;
+}
